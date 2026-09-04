@@ -2,6 +2,7 @@ baseURL = 'https://example.org/'
 locale = 'en-us'
 title = 'HD 189 b'
 theme = 'minimali'
+buildFuture = true
 disableKinds = ["sitemap"]
 
 
