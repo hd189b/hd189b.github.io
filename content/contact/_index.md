@@ -8,7 +8,7 @@ Email: [contact@hd189b.space](mailto:contact@hd189b.space)
 
 GPG: [gpg.asc](./../gpg.asc)
 
-Canary: [canary.asc](./../canary.txt)
+Canary: [canary.txt](./../canary.txt)
 
 
 **Please encrypt the body if you are sending me email.**
