@@ -6,16 +6,22 @@
   {{ range .Pages }}
     {{ $summary := partial "summary.html" (dict "page" .) }}
     <article class="preview">
-      <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+      {{ if .Title }}
+        <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+      {{ end }}
       {{ if not .Date.IsZero }}
         {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
         {{ $dateHuman := .Date | time.Format ":date_long" }}
-        <time class="preview-date" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+        {{ if .Title }}
+          <time class="preview-date" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+        {{ else }}
+          <a href="{{ .RelPermalink }}"><time class="preview-date" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time></a>
+        {{ end }}
       {{ end }}
       <div class="preview-content">
         <p>{{ $summary.text }}</p>
         {{ if $summary.truncated }}
-          <span class="read-more"><a href="{{ .RelPermalink }}">Read more &rarr;</a></span>
+          <span class="read-more"><a href="{{ .RelPermalink }}">Read more</a></span>
         {{ end }}
       </div>
     </article>

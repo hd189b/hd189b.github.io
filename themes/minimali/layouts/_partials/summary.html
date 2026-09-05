@@ -21,8 +21,5 @@ pasted text) and always truncates at a predictable word count.
 {{- $words := $page.PlainWords -}}
 {{- $truncated := gt (len $words) $length -}}
 {{- $text := delimit (first $length $words) " " -}}
-{{- if $truncated -}}
-  {{- $text = printf "%s …" $text -}}
-{{- end -}}
 
 {{- return dict "text" $text "truncated" $truncated -}}

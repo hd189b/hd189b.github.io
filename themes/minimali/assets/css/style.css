@@ -128,11 +128,6 @@ code {
 .preview {
     margin-top: 1.5rem;
     padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border);
-}
-
-.preview:last-child {
-    border-bottom: none;
 }
 
 .preview h2 {
@@ -162,7 +157,7 @@ code {
 
 .read-more a {
     font-style: italic;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 @media screen and (max-width: 1100px) {

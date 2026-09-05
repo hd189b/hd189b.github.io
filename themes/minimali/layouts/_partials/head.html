@@ -1,10 +1,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, noarchive, nofollow, nosnippet">
-<title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ printf "%s | %s" .Title site.Title }}{{ end }}</title>
+<title>{{ if or .IsHome (not .Title) }}{{ site.Title }}{{ else }}{{ printf "%s | %s" .Title site.Title }}{{ end }}</title>
 {{ partialCached "head/css.html" . }}
 
-{{- $ogTitle := cond .IsHome site.Title .Title -}}
+{{- $ogTitle := cond (or .IsHome (not .Title)) site.Title .Title -}}
 {{- $summary := partial "summary.html" (dict "page" .) -}}
 {{- $ogType := cond .IsPage "article" "website" -}}
 <meta property="og:url" content="{{ .Permalink }}">
