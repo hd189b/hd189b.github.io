@@ -1,0 +1,28 @@
+{{- /*
+Builds a plain-text, word-count-truncated summary for a page.
+Unlike the built-in .Summary, this works off .PlainWords so it can't get
+stuck inside a single large HTML block (e.g. a code block from indented
+pasted text) and always truncates at a predictable word count.
+
+@context {page} page The page to summarize.
+@context {int} length Optional word count (defaults to site.Params.summaryWords, then 60).
+
+@returns {dict} "text" (string) and "truncated" (bool).
+
+@example: {{ partial "summary.html" (dict "page" .) }}
+*/}}
+
+{{- $page := .page -}}
+{{- $length := .length -}}
+{{- if not $length -}}
+  {{- $length = site.Params.summaryWords | default 60 -}}
+{{- end -}}
+
+{{- $words := $page.PlainWords -}}
+{{- $truncated := gt (len $words) $length -}}
+{{- $text := delimit (first $length $words) " " -}}
+{{- if $truncated -}}
+  {{- $text = printf "%s …" $text -}}
+{{- end -}}
+
+{{- return dict "text" $text "truncated" $truncated -}}

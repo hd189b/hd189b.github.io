@@ -9,6 +9,9 @@ disableKinds = ["sitemap"]
 
 DisableSitemap = true
 
+[params]
+  summaryWords = 60
+
 
 [menus]
   [[menus.main]]
