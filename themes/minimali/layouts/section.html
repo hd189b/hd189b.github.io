@@ -1,9 +1,29 @@
 {{ define "main" }}
   {{ .Content }}
+  {{ if not .Pages }}
+    <p>nothing here. try other pages</p>
+  {{ end }}
   {{ range .Pages }}
-    <section>
-      <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-	  {{ .Summary }}
-    </section>
+    {{ $summary := partial "summary.html" (dict "page" .) }}
+    <article class="preview">
+      {{ if .Title }}
+        <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+      {{ end }}
+      {{ if not .Date.IsZero }}
+        {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+        {{ $dateHuman := .Date | time.Format ":date_long" }}
+        {{ if .Title }}
+          <time class="preview-date" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+        {{ else }}
+          <a href="{{ .RelPermalink }}"><time class="preview-date" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time></a>
+        {{ end }}
+      {{ end }}
+      <div class="preview-content">
+        <p>{{ $summary.text }}</p>
+        {{ if $summary.truncated }}
+          <span class="read-more"><a href="{{ .RelPermalink }}">Read more</a></span>
+        {{ end }}
+      </div>
+    </article>
   {{ end }}
 {{ end }}

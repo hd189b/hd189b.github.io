@@ -9,6 +9,9 @@ disableKinds = ["sitemap"]
 
 DisableSitemap = true
 
+[params]
+  summaryWords = 60
+
 
 [menus]
   [[menus.main]]
@@ -27,9 +30,15 @@ DisableSitemap = true
 	weight = 30
 
   [[menus.main]]
+
+  	name = 'Rants'
+	pageRef = '/rants'
+	weight = 40
+
+  [[menus.main]]
   	name = 'Contact'
 	pageRef = '/contact'
-	weight = 40
+	weight = 50
 
 [module]
   [module.hugoVersion]

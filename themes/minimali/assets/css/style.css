@@ -125,6 +125,41 @@ code {
     margin: 0;
 }
 
+.preview {
+    margin-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.preview h2 {
+    margin-bottom: 0.2rem;
+}
+
+.preview-date {
+    display: block;
+    font-size: small;
+    opacity: 0.7;
+    margin-bottom: 0.5rem;
+}
+
+.preview-content {
+    text-align: justify;
+}
+
+.preview-content p {
+    margin: 0.3rem 0;
+}
+
+.read-more {
+    display: inline-block;
+    margin-left: 0.3rem;
+    white-space: nowrap;
+}
+
+.read-more a {
+    font-style: italic;
+    text-decoration: none;
+}
+
 @media screen and (max-width: 1100px) {
    .main{
     width: 70vw;

@@ -1,5 +1,31 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, noarchive, nofollow, nosnippet">
-<title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ printf "%s | %s" .Title site.Title }}{{ end }}</title>
+<title>{{ if or .IsHome (not .Title) }}{{ site.Title }}{{ else }}{{ printf "%s | %s" .Title site.Title }}{{ end }}</title>
 {{ partialCached "head/css.html" . }}
+
+{{- $ogTitle := cond (or .IsHome (not .Title)) site.Title .Title -}}
+{{- $summary := partial "summary.html" (dict "page" .) -}}
+{{- $ogType := cond .IsPage "article" "website" -}}
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta property="og:title" content="{{ $ogTitle }}">
+{{- with $summary.text }}
+<meta property="og:description" content="{{ . }}">
+{{- end }}
+<meta property="og:locale" content="{{ site.Language.Lang }}">
+<meta property="og:type" content="{{ $ogType }}">
+{{- if eq $ogType "article" }}
+  {{- with .Section }}
+<meta property="article:section" content="{{ . }}">
+  {{- end }}
+  {{- if not .Date.IsZero }}
+<meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+  {{- end }}
+{{- end }}
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{ $ogTitle }}">
+{{- with $summary.text }}
+<meta name="twitter:description" content="{{ . }}">
+{{- end }}
