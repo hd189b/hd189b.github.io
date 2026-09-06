@@ -1,0 +1,27 @@
+{{- $scope := "all" -}}
+{{- if or (eq .Kind "page") (eq .Kind "section") -}}
+  {{- $scope = "section" -}}
+{{- end -}}
+<!DOCTYPE html>
+<html lang="{{ site.Language.Locale }}" dir="{{ or site.Language.Direction `ltr` }}">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body data-search-scope="{{ $scope }}" data-search-section="{{ .Section }}" data-search-index="{{ "index.json" | relURL }}">
+  <a class="skip-link" href="#main">Skip to content</a>
+  {{ partial "background.html" . }}
+  <div class="site">
+    <header class="site-header">
+      {{ partial "header.html" . }}
+    </header>
+    <main id="main" class="site-main">
+      {{ block "main" . }}{{ end }}
+    </main>
+    <footer class="site-footer">
+      {{ partial "footer.html" . }}
+    </footer>
+  </div>
+  {{ partial "search-modal.html" . }}
+  {{ partialCached "head/js.html" . }}
+</body>
+</html>

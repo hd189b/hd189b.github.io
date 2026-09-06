@@ -1,0 +1,29 @@
+baseURL = 'https://example.org/'
+locale = 'en-US'
+title = 'moda'
+
+[menus]
+  [[menus.main]]
+    name = 'Home'
+    pageRef = '/'
+    weight = 10
+
+  [[menus.main]]
+    name = 'Blogs'
+    pageRef = '/blogs'
+    weight = 20
+
+  [[menus.main]]
+    name = 'Books'
+    pageRef = '/books'
+    weight = 30
+
+  [[menus.main]]
+    name = 'Rants'
+    pageRef = '/rants'
+    weight = 40
+
+[module]
+  [module.hugoVersion]
+    extended = true
+    min = '0.146.0'

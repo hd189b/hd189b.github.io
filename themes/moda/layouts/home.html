@@ -1,0 +1,27 @@
+{{ define "main" }}
+  <section class="hero" data-reveal>
+    <p class="hero-eyebrow">// TRACKING HD 189733 b</p>
+    <h1 class="hero-title">{{ site.Title }}</h1>
+    {{ with .Content }}
+      <div class="hero-content">{{ . }}</div>
+    {{ end }}
+  </section>
+
+  {{ partial "status-panel.html" . }}
+
+  {{ $pages := where site.RegularPages "Kind" "page" }}
+  {{ $pages = $pages.ByDate.Reverse }}
+  {{ $hasOwnContent := ne (len (trim .Plain " \t\r\n")) 0 }}
+  {{ if $pages }}
+    <section class="latest">
+      <h2 class="section-label">Latest transmissions</h2>
+      <div class="grid">
+        {{ range first 6 $pages }}
+          {{ partial "card.html" . }}
+        {{ end }}
+      </div>
+    </section>
+  {{ else if not $hasOwnContent }}
+    <p class="empty-state">nothing here. try other pages</p>
+  {{ end }}
+{{ end }}

@@ -1,0 +1,19 @@
+{{ define "main" }}
+  <article class="single" data-reveal>
+    {{ if .Title }}
+      <h1 class="single-title">{{ .Title }}</h1>
+    {{ end }}
+
+    {{ if not .Date.IsZero }}
+      {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+      {{ $dateHuman := .Date | time.Format ":date_long" }}
+      <time class="single-date" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+    {{ end }}
+
+    <div class="single-content">
+      {{ .Content }}
+    </div>
+
+    {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+  </article>
+{{ end }}
