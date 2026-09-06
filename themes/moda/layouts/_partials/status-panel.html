@@ -1,0 +1,65 @@
+{{- /*
+Renders a HUD-style telemetry panel for HD 189733 b, shown on the home page.
+Static facts live here; the phase/status/flux rows are updated live by
+assets/js/site.js, driven by the orbit canvas animation.
+
+@example: {{ partial "status-panel.html" . }}
+*/}}
+
+<aside class="status-panel" id="status-panel" aria-label="HD 189733 b telemetry">
+  <span class="hud-corner hud-corner--tl" aria-hidden="true"></span>
+  <span class="hud-corner hud-corner--tr" aria-hidden="true"></span>
+  <span class="hud-corner hud-corner--bl" aria-hidden="true"></span>
+  <span class="hud-corner hud-corner--br" aria-hidden="true"></span>
+
+  <div class="status-panel-head">
+    <span class="status-live-dot" aria-hidden="true"></span>
+    <span class="status-panel-title">HD 189733 b &middot; TELEMETRY</span>
+  </div>
+
+  <dl class="status-grid status-grid--live">
+    <div class="status-row">
+      <dt>Orbital phase</dt>
+      <dd data-field="phase">&mdash;</dd>
+    </div>
+    <div class="status-row">
+      <dt>Status</dt>
+      <dd data-field="event">idle</dd>
+    </div>
+    <div class="status-row">
+      <dt>Relative flux</dt>
+      <dd data-field="flux">100.0%</dd>
+    </div>
+  </dl>
+
+  <dl class="status-grid">
+    <div class="status-row">
+      <dt>Host star</dt>
+      <dd>K1&ndash;2V, HD 189733 A</dd>
+    </div>
+    <div class="status-row">
+      <dt>Distance</dt>
+      <dd>~64.5 ly</dd>
+    </div>
+    <div class="status-row">
+      <dt>Orbital period</dt>
+      <dd>2.2 days</dd>
+    </div>
+    <div class="status-row">
+      <dt>Radius</dt>
+      <dd>~1.13 Jupiter</dd>
+    </div>
+    <div class="status-row">
+      <dt>Dayside temp</dt>
+      <dd>~1000&deg;C</dd>
+    </div>
+    <div class="status-row">
+      <dt>Wind speed</dt>
+      <dd>~8,600 km/h</dd>
+    </div>
+    <div class="status-row">
+      <dt>Companion</dt>
+      <dd>M dwarf, ~216 AU</dd>
+    </div>
+  </dl>
+</aside>

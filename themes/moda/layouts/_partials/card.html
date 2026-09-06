@@ -1,0 +1,31 @@
+{{- /*
+Renders a preview card for a regular page, used on the home page and section lists.
+
+@context {page} . The page to preview.
+
+@example: {{ partial "card.html" . }}
+*/}}
+
+{{- $page := . -}}
+{{- $summary := partial "summary.html" (dict "page" $page) -}}
+{{- $words := len $page.PlainWords -}}
+{{- $readMins := math.Ceil (div (float $words) 200.0) -}}
+<article class="card" data-reveal>
+  <div class="card-meta">
+    {{- with $page.Section }}<span class="card-tag">{{ . }}</span>{{ end -}}
+    {{- if not $page.Date.IsZero }}
+      {{- $dateMachine := $page.Date | time.Format "2006-01-02T15:04:05-07:00" }}
+      {{- $dateHuman := $page.Date | time.Format ":date_long" }}
+      <time class="card-date" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+    {{- end }}
+    <span class="card-read-time">{{ $readMins }} min read</span>
+  </div>
+  {{- if $page.Title }}
+    <h3 class="card-title"><a href="{{ $page.RelPermalink }}">{{ $page.LinkTitle }}</a></h3>
+  {{- end }}
+  <p class="card-excerpt">{{ $summary.text }}{{ if $summary.truncated }}&hellip;{{ end }}</p>
+  <a class="card-link" href="{{ $page.RelPermalink }}">
+    {{ if $page.Title }}Read entry{{ else }}Open{{ end }}
+    <span class="card-link-arrow" aria-hidden="true">&rarr;</span>
+  </a>
+</article>

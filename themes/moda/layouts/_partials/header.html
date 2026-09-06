@@ -1,0 +1,29 @@
+<div class="header-inner">
+  <a class="brand" href="{{ site.Home.RelPermalink }}">
+    <span class="brand-prompt">~$</span>
+    <span class="brand-name">{{ site.Title }}</span>
+    <span class="brand-cursor" aria-hidden="true"></span>
+  </a>
+
+  <nav id="primary-nav" class="site-nav">
+    {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+  </nav>
+
+  <div class="header-actions">
+    <button class="search-trigger" type="button" aria-haspopup="dialog" aria-controls="search-modal">
+      <svg class="search-trigger-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+        <circle cx="8.5" cy="8.5" r="6" fill="none" stroke="currentColor" stroke-width="1.6"></circle>
+        <line x1="13.2" y1="13.2" x2="18" y2="18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></line>
+      </svg>
+      <span class="search-trigger-label">Search</span>
+      <kbd class="search-trigger-kbd">Ctrl K</kbd>
+    </button>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="sr-only">Menu</span>
+    </button>
+  </div>
+</div>
