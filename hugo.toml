@@ -12,6 +12,9 @@ DisableSitemap = true
 [params]
   summaryWords = 60
 
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
 
 [menus]
   [[menus.main]]
