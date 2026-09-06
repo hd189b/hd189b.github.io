@@ -1,7 +1,8 @@
 {{ define "main" }}
-  {{ .Content }}
-  {{ if not .Pages }}
+  {{ if eq (trim .Plain " \t\r\n") "" }}
     <p>nothing here. try other pages</p>
+  {{ else }}
+    {{ .Content }}
   {{ end }}
   {{ range .Pages }}
     {{ $summary := partial "summary.html" (dict "page" .) }}
