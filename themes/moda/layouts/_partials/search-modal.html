@@ -1,0 +1,45 @@
+{{- /*
+Command-palette style search modal, toggled by Ctrl/Cmd+K (see assets/js/site.js).
+Its scope adapts to the current page via data-search-scope on <body>:
+"all" (home / taxonomy pages) searches the whole site index, "section"
+(single pages and section listings alike) searches only the current
+section's pages.
+
+@example: {{ partial "search-modal.html" . }}
+*/}}
+
+<div class="search-overlay" id="search-overlay" hidden>
+  <div class="search-modal" id="search-modal" role="dialog" aria-modal="true" aria-label="Search">
+    <span class="hud-corner hud-corner--tl" aria-hidden="true"></span>
+    <span class="hud-corner hud-corner--tr" aria-hidden="true"></span>
+    <span class="hud-corner hud-corner--bl" aria-hidden="true"></span>
+    <span class="hud-corner hud-corner--br" aria-hidden="true"></span>
+
+    <div class="search-field">
+      <svg class="search-field-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+        <circle cx="8.5" cy="8.5" r="6" fill="none" stroke="currentColor" stroke-width="1.6"></circle>
+        <line x1="13.2" y1="13.2" x2="18" y2="18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></line>
+      </svg>
+      <input
+        type="text"
+        id="search-input"
+        class="search-input"
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+        placeholder="Search&hellip;"
+        aria-label="Search"
+      >
+      <span class="search-scope-badge" id="search-scope-badge">everything</span>
+    </div>
+
+    <div class="search-results" id="search-results" role="listbox"></div>
+
+    <div class="search-footer">
+      <span><kbd>&uarr;</kbd><kbd>&darr;</kbd> navigate</span>
+      <span><kbd>&crarr;</kbd> open</span>
+      <span><kbd>esc</kbd> close</span>
+      <span class="search-footer-hint">wrap in /.../ for regex</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+{{ define "main" }}
+  <header class="list-header" data-reveal>
+    <h1 class="list-title">{{ .Title }}</h1>
+    {{ .Content }}
+  </header>
+
+  {{ $hasOwnContent := ne (len (trim .Plain " \t\r\n")) 0 }}
+  {{ if and (not .Pages) (not $hasOwnContent) }}
+    <p class="empty-state">nothing here. try other pages</p>
+  {{ end }}
+
+  <ul class="terms-grid">
+    {{ range .Pages }}
+      <li><a class="chip chip--lg" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+    {{ end }}
+  </ul>
+{{ end }}

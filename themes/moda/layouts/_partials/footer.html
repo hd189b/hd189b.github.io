@@ -1,0 +1,5 @@
+<p class="footer-text">Copyright {{ now.Year }}. All rights reserved.</p>
+<p class="footer-tagline">Transmitted from a pale blue dot, watching a deep blue giant.</p>
+{{- with .OutputFormats.Get "rss" }}
+<p class="footer-rss"><a href="{{ .RelPermalink }}">RSS feed</a></p>
+{{- end }}
