@@ -355,7 +355,6 @@
 
   var ctx = canvas.getContext("2d");
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var darkMode = window.matchMedia("(prefers-color-scheme: dark)");
 
   var width = 0;
   var height = 0;
@@ -372,31 +371,18 @@
   var TRANSIT_DEPTH = 2.4; // %, matches the real, unusually deep transit of HD 189733 b
 
   function palette() {
-    return darkMode.matches
-      ? {
-          bg: "#05070d",
-          star: "255, 255, 255",
-          hostStar: "255, 177, 92",
-          hostCore: "#fff3d6",
-          companion: "255, 120, 96",
-          planetDay: "#bfe0ff",
-          planetMid: "#4f9dff",
-          planetEdge: "#1e6fff",
-          planetNight: "8, 14, 34",
-          glow: "87, 168, 255",
-        }
-      : {
-          bg: "#f4f6fb",
-          star: "70, 90, 130",
-          hostStar: "226, 121, 10",
-          hostCore: "#fff0da",
-          companion: "205, 90, 70",
-          planetDay: "#eaf5ff",
-          planetMid: "#4f9dff",
-          planetEdge: "#1e6fff",
-          planetNight: "18, 26, 48",
-          glow: "30, 111, 255",
-        };
+    return {
+      bg: "#05070d",
+      star: "255, 255, 255",
+      hostStar: "255, 177, 92",
+      hostCore: "#fff3d6",
+      companion: "255, 120, 96",
+      planetDay: "#bfe0ff",
+      planetMid: "#4f9dff",
+      planetEdge: "#1e6fff",
+      planetNight: "8, 14, 34",
+      glow: "87, 168, 255",
+    };
   }
 
   function resize() {
@@ -668,12 +654,6 @@
       rafId = requestAnimationFrame(frame);
     }
   });
-
-  if (darkMode.addEventListener) {
-    darkMode.addEventListener("change", function () {
-      draw(t);
-    });
-  }
 
   resize();
 
