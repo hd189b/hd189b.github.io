@@ -182,6 +182,12 @@
       }
     }
 
+    /* untitled quote posts are labelled by who said it and where */
+    function labelFor(p) {
+      if (p.title) return p.title;
+      return [p.author, p.source].filter(Boolean).join(" \u00b7 ");
+    }
+
     function renderEmpty(message) {
       resultsEl.innerHTML = '<p class="search-empty">' + message + "</p>";
       currentResults = [];
@@ -233,7 +239,7 @@
         renderList(
           pool.slice(0, 8).map(function (p) {
             return {
-              title: p.title || "",
+              title: labelFor(p),
               section: p.section,
               permalink: p.permalink,
               snippet: (p.content || "").replace(/\s+/g, " ").trim().slice(0, 160),
@@ -247,10 +253,10 @@
       var found = [];
       for (var i = 0; i < pool.length && found.length < 30; i++) {
         var p = pool[i];
-        var haystack = (p.title || "") + " " + (p.tags || []).join(" ") + " " + (p.content || "");
+        var haystack = [p.title, p.author, p.source, (p.tags || []).join(" "), p.content].join(" ");
         if (matcher(haystack)) {
           found.push({
-            title: p.title || "",
+            title: labelFor(p),
             section: p.section,
             permalink: p.permalink,
             snippet: snippetFor(p.content || p.title || "", query),

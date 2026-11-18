@@ -10,6 +10,8 @@
     "permalink": {{ $p.RelPermalink | jsonify }},
     "date": {{ ($p.Date.Format "Jan 2, 2006") | jsonify }},
     "tags": {{ $tags | jsonify }},
+    "author": {{ ($p.Params.author | default "") | jsonify }},
+    "source": {{ ($p.Params.source | default "") | jsonify }},
     "content": {{ ($p.Plain | htmlUnescape) | jsonify }}
   }
 {{- end -}}
