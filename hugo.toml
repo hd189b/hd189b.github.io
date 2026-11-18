@@ -1,7 +1,7 @@
 baseURL = 'https://hd189b.space/'
 locale = 'en-us'
 title = 'HD 189 b'
-theme = 'minimali'
+theme = 'moda'
 buildFuture = true
 disableKinds = ["sitemap"]
 
