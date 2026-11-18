@@ -1,0 +1,20 @@
+{{- /*
+Returns the first sentence (or clause, for verse ending in ";") of a page's
+plain text, and whether there's more after it.
+
+@context {page} . The page.
+
+@returns {dict} "text" (string) and "truncated" (bool).
+
+@example: {{ partial "opening-line.html" . }}
+*/}}
+
+{{- $plain := trim (.Plain | htmlUnescape) " \t\r\n" -}}
+{{- $first := index (findRE `^[\s\S]*?[.;?!…](\s|$)` $plain 1) 0 | default $plain -}}
+{{- $first = trim $first " \t\r\n" -}}
+{{- $truncated := lt (len $first) (len $plain) -}}
+{{- /* a full sentence needs no ellipsis; a clause cut at ";" gets one in place of the ";" */ -}}
+{{- if strings.HasSuffix $first ";" -}}
+  {{- $first = printf "%s…" (strings.TrimSuffix ";" $first) -}}
+{{- end -}}
+{{- return dict "text" $first "truncated" $truncated -}}

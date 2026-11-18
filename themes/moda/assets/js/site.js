@@ -1184,7 +1184,7 @@
     }
 
     if (!L.narrow) {
-      ctx.font = "10px ui-monospace, 'JetBrains Mono', 'Fira Code', Menlo, Consolas, monospace";
+      ctx.font = "10px 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace";
       ctx.textBaseline = "alphabetic";
       drawLabel(L.x + L.R * 0.75, L.y - L.R * 0.75, L.x + L.R * 1.5, L.y - L.R * 1.6, "HD 189733 A");
       drawLabel(pos.x + L.rp * 0.8, pos.y - L.rp * 0.8, pos.x + L.rp + 14, pos.y - L.rp - 18, "b");

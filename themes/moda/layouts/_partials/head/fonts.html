@@ -1,0 +1,43 @@
+{{- /*
+Self-hosted web fonts (SIL Open Font License, see static/fonts/LICENSE-*.txt).
+Served from this site so no visitor data goes to a third-party font host.
+Variable fonts: one file per family/style covers every weight.
+
+  Inter          -- headings and general text   (--font-sans)
+  JetBrains Mono -- HUD / interface text         (--font-mono)
+  Newsreader     -- quotes and long-form reading (--font-serif)
+
+The two used on every page are preloaded to avoid a flash of fallback text.
+*/}}
+<link rel="preload" href="{{ "fonts/inter-latin-wght-normal.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ "fonts/jetbrains-mono-latin-wght-normal.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("{{ "fonts/inter-latin-wght-normal.woff2" | relURL }}") format("woff2");
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url("{{ "fonts/jetbrains-mono-latin-wght-normal.woff2" | relURL }}") format("woff2");
+}
+@font-face {
+  font-family: "Newsreader";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("{{ "fonts/newsreader-latin-wght-normal.woff2" | relURL }}") format("woff2");
+}
+@font-face {
+  font-family: "Newsreader";
+  font-style: italic;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("{{ "fonts/newsreader-latin-wght-italic.woff2" | relURL }}") format("woff2");
+}
+</style>

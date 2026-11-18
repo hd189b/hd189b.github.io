@@ -1,5 +1,8 @@
 {{- /*
 Renders a preview card for a regular page, used on the home page and section lists.
+Posts with an `author` in their front matter (quote posts, e.g. in Rants) show
+their opening line as a quote with the author, instead of a plain excerpt.
+Read time is only shown when it's more than a minute.
 
 @context {page} . The page to preview.
 
@@ -7,25 +10,38 @@ Renders a preview card for a regular page, used on the home page and section lis
 */}}
 
 {{- $page := . -}}
-{{- $summary := partial "summary.html" (dict "page" $page) -}}
+{{- $author := $page.Params.author -}}
 {{- $words := len $page.PlainWords -}}
 {{- $readMins := math.Ceil (div (float $words) 200.0) -}}
-<article class="card" data-reveal>
+<article class="card{{ if $author }} card--quote{{ end }}" data-reveal>
   <div class="card-meta">
-    {{- with $page.Section }}<span class="card-tag">{{ . }}</span>{{ end -}}
+    {{- with $page.CurrentSection }}{{ if not .IsHome }}<span class="card-tag">{{ .LinkTitle }}</span>{{ end }}{{ end -}}
     {{- if not $page.Date.IsZero }}
       {{- $dateMachine := $page.Date | time.Format "2006-01-02T15:04:05-07:00" }}
       {{- $dateHuman := $page.Date | time.Format ":date_long" }}
       <time class="card-date" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
     {{- end }}
-    <span class="card-read-time">{{ $readMins }} min read</span>
+    {{- if gt $readMins 1 }}
+      <span class="card-read-time">{{ $readMins }} min read</span>
+    {{- end }}
   </div>
   {{- if $page.Title }}
     <h3 class="card-title"><a href="{{ $page.RelPermalink }}">{{ $page.LinkTitle }}</a></h3>
   {{- end }}
-  <p class="card-excerpt">{{ $summary.text }}{{ if $summary.truncated }}&hellip;{{ end }}</p>
+  {{- if $author }}
+    {{- $line := partial "opening-line.html" $page }}
+    <figure class="card-quote">
+      <blockquote class="card-quote-text">
+        <p><a href="{{ $page.RelPermalink }}">{{ $line.text }}</a></p>
+      </blockquote>
+      <figcaption class="card-quote-author">&mdash; {{ $author }}</figcaption>
+    </figure>
+  {{- else }}
+    {{- $summary := partial "summary.html" (dict "page" $page) }}
+    <p class="card-excerpt">{{ $summary.text }}{{ if $summary.truncated }}&hellip;{{ end }}</p>
+  {{- end }}
   <a class="card-link" href="{{ $page.RelPermalink }}">
-    {{ if $page.Title }}Read entry{{ else }}Open{{ end }}
+    {{ if $author }}Read in full{{ else if $page.Title }}Read entry{{ else }}Open{{ end }}
     <span class="card-link-arrow" aria-hidden="true">&rarr;</span>
   </a>
 </article>

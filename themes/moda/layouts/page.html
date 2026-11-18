@@ -11,9 +11,58 @@
     {{ end }}
 
     <div class="single-content">
-      {{ .Content }}
+      {{- with .Params.author }}
+        <figure class="quote">
+          <blockquote class="quote-body">
+            {{ $.Content }}
+          </blockquote>
+          <figcaption class="quote-attribution">
+            <span class="quote-rule" aria-hidden="true"></span>
+            <span class="quote-author">{{ . }}</span>
+            {{- with $.Params.source }}
+              <cite class="quote-source">{{ . }}</cite>
+            {{- end }}
+          </figcaption>
+        </figure>
+      {{- else }}
+        {{ .Content }}
+      {{- end }}
     </div>
 
     {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+
+    {{- $section := .CurrentSection }}
+    {{- if and $section (not $section.IsHome) }}
+      {{- $siblings := $section.RegularPages.ByDate }}
+      {{- $older := false }}
+      {{- $newer := false }}
+      {{- range $i, $p := $siblings }}
+        {{- if eq $p $ }}
+          {{- if gt $i 0 }}{{ $older = index $siblings (sub $i 1) }}{{ end }}
+          {{- if lt (add $i 1) (len $siblings) }}{{ $newer = index $siblings (add $i 1) }}{{ end }}
+        {{- end }}
+      {{- end }}
+      <nav class="post-nav" aria-label="More from {{ $section.LinkTitle }}">
+        {{- if or $older $newer }}
+          <div class="post-nav-pair">
+            {{- with $older }}
+              <a class="post-nav-link post-nav-link--older" href="{{ .RelPermalink }}" rel="prev">
+                <span class="post-nav-dir">&larr; Older</span>
+                <span class="post-nav-label">{{ partial "entry-label.html" . }}</span>
+              </a>
+            {{- else }}
+              <span class="post-nav-spacer" aria-hidden="true"></span>
+            {{- end }}
+            {{- with $newer }}
+              <a class="post-nav-link post-nav-link--newer" href="{{ .RelPermalink }}" rel="next">
+                <span class="post-nav-dir">Newer &rarr;</span>
+                <span class="post-nav-label">{{ partial "entry-label.html" . }}</span>
+              </a>
+            {{- end }}
+          </div>
+        {{- end }}
+        <a class="post-nav-back" href="{{ $section.RelPermalink }}">&larr; Back to {{ $section.LinkTitle }}</a>
+      </nav>
+    {{- end }}
   </article>
 {{ end }}

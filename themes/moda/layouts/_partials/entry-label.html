@@ -1,0 +1,21 @@
+{{- /*
+Returns a short human label for a post, for places that need one even when
+the post has no title (e.g. untitled quote posts in Rants): the title if set,
+else the `author` front matter, else the date.
+
+@context {page} . The page to label.
+
+@returns {string}
+
+@example: {{ partial "entry-label.html" . }}
+*/}}
+
+{{- $label := .LinkTitle -}}
+{{- if not $label -}}
+  {{- with .Params.author -}}
+    {{- $label = . -}}
+  {{- else -}}
+    {{- if not .Date.IsZero }}{{ $label = .Date | time.Format ":date_medium" }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $label -}}

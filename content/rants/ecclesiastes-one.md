@@ -2,6 +2,8 @@
 date = '2026-10-01'
 draft = false
 title = ''
+author = 'Ecclesiastes'
+source = 'Ecclesiastes 1:2–4'
 +++
 
 Vanity of vanities, saith the Preacher, vanity of vanities; all is vanity.

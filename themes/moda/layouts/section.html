@@ -6,7 +6,21 @@
 
   {{ $hasOwnContent := ne (len (trim .Plain " \t\r\n")) 0 }}
   {{ if and (not .Pages) (not $hasOwnContent) }}
-    <p class="empty-state">nothing here. try other pages</p>
+    <div class="empty-state empty-state--soon">
+      <p class="empty-state-signal" aria-hidden="true">&middot; &middot; &middot;</p>
+      <p class="empty-state-title">No transmissions yet</p>
+      <p class="empty-state-text">The first {{ lower .Title }} entries are still in transit. Check back soon.</p>
+      {{- $others := slice }}
+      {{- range site.Sections }}
+        {{- if and .RegularPagesRecursive (ne . $) }}{{ $others = $others | append . }}{{ end }}
+      {{- end }}
+      {{- with $others }}
+        <p class="empty-state-links">
+          Meanwhile, read
+          {{ range $i, $s := . }}{{ if $i }} &middot; {{ end }}<a href="{{ $s.RelPermalink }}">{{ $s.LinkTitle }}</a>{{ end }}
+        </p>
+      {{- end }}
+    </div>
   {{ end }}
 
   <div class="grid">

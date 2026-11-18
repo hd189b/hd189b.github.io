@@ -23,12 +23,12 @@ DisableSitemap = true
     weight = 10
 
   [[menus.main]]
-  	name ='Blogs'
+  	name = 'Writing'
 	pageRef = "/blogs"
 	weight = 20
 
   [[menus.main]]
-  	name = 'Book Review'
+  	name = 'Books'
 	pageRef = '/books'
 	weight = 30
 
