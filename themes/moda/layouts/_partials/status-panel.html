@@ -1,7 +1,7 @@
 {{- /*
 Renders a HUD-style telemetry panel for HD 189733 b, shown on the home page.
-Static facts live here; the phase/status/flux rows are updated live by
-assets/js/site.js, driven by the orbit canvas animation.
+Static facts live here; the live rows (phase, status, flux, next transit)
+are updated by assets/js/site.js, driven by the orbit canvas animation.
 
 @example: {{ partial "status-panel.html" . }}
 */}}
@@ -30,36 +30,36 @@ assets/js/site.js, driven by the orbit canvas animation.
       <dt>Relative flux</dt>
       <dd data-field="flux">100.0%</dd>
     </div>
+    <div class="status-row">
+      <dt>Next transit</dt>
+      <dd data-field="next">&mdash;</dd>
+    </div>
   </dl>
 
-  <dl class="status-grid">
+  <dl class="status-grid status-grid--last">
     <div class="status-row">
       <dt>Host star</dt>
-      <dd>K1&ndash;2V, HD 189733 A</dd>
+      <dd>K1.5 V &middot; 64.5 ly</dd>
     </div>
     <div class="status-row">
-      <dt>Distance</dt>
-      <dd>~64.5 ly</dd>
-    </div>
-    <div class="status-row">
-      <dt>Orbital period</dt>
+      <dt>Year</dt>
       <dd>2.2 days</dd>
     </div>
     <div class="status-row">
-      <dt>Radius</dt>
-      <dd>~1.13 Jupiter</dd>
+      <dt>Size</dt>
+      <dd>1.13 &times; Jupiter</dd>
     </div>
     <div class="status-row">
-      <dt>Dayside temp</dt>
-      <dd>~1000&deg;C</dd>
+      <dt>Dayside</dt>
+      <dd>~940&deg;C</dd>
     </div>
     <div class="status-row">
-      <dt>Wind speed</dt>
-      <dd>~8,600 km/h</dd>
+      <dt>Colour</dt>
+      <dd>Cobalt blue</dd>
     </div>
     <div class="status-row">
-      <dt>Companion</dt>
-      <dd>M dwarf, ~216 AU</dd>
+      <dt>Discovered</dt>
+      <dd>2005</dd>
     </div>
   </dl>
 </aside>

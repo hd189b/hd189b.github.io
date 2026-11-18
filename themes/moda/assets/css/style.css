@@ -73,7 +73,7 @@ a:visited {
   left: 1rem;
   z-index: 100;
   background: var(--accent);
-  color: #fff;
+  color: var(--bg);
   padding: 0.6rem 1rem;
   border-radius: 0 0 8px 8px;
   font-family: var(--font-mono);
@@ -661,7 +661,7 @@ a:visited {
 
 .chip:hover {
   background: var(--accent);
-  color: #fff;
+  color: var(--bg);
 }
 
 .chip--lg {
@@ -777,6 +777,10 @@ a:visited {
 
 .status-grid--live .status-row dd {
   color: var(--accent);
+}
+
+.status-grid--last {
+  margin-bottom: 0;
 }
 
 /* Below this, the fixed sidebar would overlap the centered 880px content
